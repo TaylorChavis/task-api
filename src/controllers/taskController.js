@@ -12,7 +12,21 @@ export async function createTask(req, res, next) {
 }
 
 export async function getTaskById(req, res, next) {
-  const { id } = req.params;
-  const task = await taskService.getTaskById(Number(id));
+  const id = Number(req.params.id);
+
+  if (isNaN(id)) {
+    const error = new Error('ID must be a number');
+    error.status = 400;
+    return next(error);
+  }
+
+  const task = await taskService.getTaskById(id);
+
+  if (!task) {
+    const error = new Error('Task not found');
+    error.status = 404;
+    return next(error);
+  }
+
   res.json(task);
 }
