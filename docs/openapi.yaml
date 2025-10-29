@@ -5,6 +5,8 @@ info:
 servers:
   - url: http://localhost:3000
     description: Local development server
+  - url: https://task-api-ig8k.onrender.com/
+    description: Production server on render
 tags:
   - name: Tasks
     description: Task-related endpoints
